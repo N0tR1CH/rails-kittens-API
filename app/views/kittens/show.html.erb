@@ -1,0 +1,8 @@
+<h1>Kitten <% @kitten.object_id %></h1>
+
+<%= @kitten.name %>
+<%= @kitten.age %>
+<%= @kitten.cuteness %>
+<%= @kitten.softness%>
+
+<td><%= button_to 'destroy', kitten_path(@kitten), method: :delete, data: {confirm: "Are you sure?"} %></td>

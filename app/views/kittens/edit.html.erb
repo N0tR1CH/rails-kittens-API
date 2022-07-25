@@ -1,0 +1,14 @@
+<h1>Kittens edit</h1>
+<%= form_with model: @kitten, authenticity_token: true do |form| %>
+  <%= form.label(:name) %>
+  <%= form.text_field(:name, placeholder: "name") %><br>
+  <%= form.label(:age) %>
+  <%= form.text_field(:age, placeholder: 10) %><br>
+  <%= form.label(:cuteness) %>
+  <%= form.text_field(:cuteness, placeholder: "high") %><br>
+  <%= form.label(:softness) %>
+  <%= form.text_field(:softness, placeholder: "high") %><br>
+  <%= form.submit('Submit') %>
+<% end %>
+<td><%= button_to 'destroy', kitten_path(@kitten), method: :delete, data: {confirm: "Are you sure?"} %></td>
+
