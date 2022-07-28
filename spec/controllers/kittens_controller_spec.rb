@@ -1,8 +1,9 @@
 require 'rails_helper'
 require 'devise'
+require 'faker'
 
 describe KittensController do
-    let(:user) { create :user, email: "dadasdadsa@gmail.com" }
+    let(:user) { create :user, email: Faker::Internet.email }
     let!(:auth_headers) { user.create_new_auth_token }
 
     before do

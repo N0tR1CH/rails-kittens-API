@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: a3dd70c11ad5fc6695b9354a7e0a2df40c6b06c9
+  branch: master
+  specs:
+    faker (2.21.0)
+      i18n (>= 1.8.11, < 2)
+
+GIT
   remote: https://github.com/lynndylanhurley/devise_token_auth
   revision: 8f44a8c66fd772b2d33be4ba187c0b1a47caba2a
   specs:
@@ -300,6 +308,7 @@ DEPENDENCIES
   devise_token_auth (>= 1.2.0)!
   factory_bot (~> 4.8, >= 4.8.2)
   factory_bot_rails (~> 4.11.1)
+  faker!
   importmap-rails
   jbuilder
   puma (~> 5.0)
