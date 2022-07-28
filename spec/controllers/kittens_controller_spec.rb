@@ -1,15 +1,20 @@
 require 'rails_helper'
+require 'devise'
 
 describe KittensController do
-    
+    let(:user) { create :user, email: "dadasdadsa@gmail.com" }
+    let!(:auth_headers) { user.create_new_auth_token }
+
+    before do
+        request.headers.merge! auth_headers
+    end
+
     describe "[GET] index" do
         let!(:kittens) { create_list :kitten, 3 }
-
         before do
             get :index
         end
         context 'with kittens' do
-            
             it { expect(JSON.parse(response.body).count).to eq(3) }
         end
 
