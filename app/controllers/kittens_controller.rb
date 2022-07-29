@@ -1,6 +1,6 @@
 class KittensController < ApplicationController
   before_action :set_kitten, only: [:show]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   
   def index
     @kittens = Kitten.all

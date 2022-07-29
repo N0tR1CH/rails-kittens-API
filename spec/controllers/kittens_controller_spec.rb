@@ -3,7 +3,7 @@ require 'devise'
 require 'faker'
 
 describe KittensController do
-    let(:user) { create :user, email: Faker::Internet.email }
+    let(:user) { create :user }
     let!(:auth_headers) { user.create_new_auth_token }
 
     before do
