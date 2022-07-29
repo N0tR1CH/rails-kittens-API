@@ -5,7 +5,6 @@ require 'faker'
 describe KittensController do
     let(:user) { create :user }
     let!(:auth_headers) { user.create_new_auth_token }
-
     before do
         request.headers.merge! auth_headers
     end
