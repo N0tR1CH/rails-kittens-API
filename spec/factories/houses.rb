@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :house do
+    user 
     street { "MyString" }
     city { "MyString" }
-    user { nil }
   end
 end

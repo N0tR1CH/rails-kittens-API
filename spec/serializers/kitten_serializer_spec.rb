@@ -2,21 +2,15 @@ require 'rails_helper'
 require 'devise'
 require 'faker'
 
-describe KittenSerializer do
-  let(:user) { create :user }
-  let!(:auth_headers) { user.create_new_auth_token }
-
-  let(:kitten) { FactoryBot.build(:kitten) }
-  let(:serializer) { described_class.new(kitten, scope: user, scope_name: :current_user) }
-  let(:serialization) { ActiveModelSerializers::Adapter.create(serializer) }
-
-  let(:subject) { JSON.parse(serialization.to_json) }
+describe KittenSerializer, type: :serializer do
+  subject { described_class.new(kitten).to_h }
+  let(:kitten) { build :kitten }
 
   it 'has a name that matches' do
-    expect(subject['name']).to eql(kitten.name)
+    is_expected.to include(name: kitten.name)
   end
 
   it 'has a age that matches' do
-    expect(subject['age']).to eql(kitten.age)
+    is_expected.to include(age: kitten.age)
   end  
 end
