@@ -88,3 +88,4 @@ group :test do
 end
 
 gem "pundit", "~> 2.2"
+gem 'rolify', '~> 6.0'
