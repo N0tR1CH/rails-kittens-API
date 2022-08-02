@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :add_user]
 
   def index
     @companies = companies
@@ -27,12 +27,15 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def user_new
-    @company.user = User.new
-  end
-
   def edit
     
+  end
+
+  def add_user
+    @company.users << User.where(id: params[:user_ids])
+    render json: @company, status: 200
+  rescue ActiveRecord::RecordInvalid
+    render json: { message: "One of the users is already in the company." } 
   end
 
   def update
@@ -60,6 +63,7 @@ class CompaniesController < ApplicationController
   end
 
   def set_company
+    @company = Company.find(params[:id])
     rescue ActiveRecord::RecordNotFound
     head :not_found
   end

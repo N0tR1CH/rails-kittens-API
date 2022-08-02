@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :users
   resources :houses
   resources :companies
+  post '/companies/:id/add_user', to: 'companies#add_user'
   root "kittens#index"
 end
