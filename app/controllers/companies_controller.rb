@@ -32,13 +32,15 @@ class CompaniesController < ApplicationController
   end
 
   def add_user
-    @company.users << User.where(id: params[:user_ids])
-    render json: @company, status: 200
-  rescue ActiveRecord::RecordInvalid
-    render json: { message: "One of the users is already in the company." } 
+    ActiveRecord::Base.transaction do
+      @company.users << User.where(id: params[:user_ids])
+      render json: @company, status: 200
+    rescue ActiveRecord::RecordInvalid
+      render json: { message: "One of the users is already in the company." } 
+    end
   end
 
-  def update
+  def update    
     if @company.update(company_params)
       current_user.add_role :editor, @company
       render json: @company, status: 204
