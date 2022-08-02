@@ -18,7 +18,7 @@ class HousesController < ApplicationController
 
   def create
     @house = current_user.houses.new(house_params)
-    authorize @house
+   
     if @house.save
       current_user.add_role :creator, @house
       render json: @house, status: 201

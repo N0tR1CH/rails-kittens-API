@@ -15,3 +15,15 @@ describe HousesController do
     it { expect { create_request }.to change { House.count }.from(0).to(1) }
   end
 end
+
+# User
+# has_many :user_companies
+# has_many :companies, through: user_company
+
+# UserCompany
+# belongs_to :user
+# belongs_to :company
+
+# Company
+# has_many :user_companies
+# has_many :users, through: user_comapny

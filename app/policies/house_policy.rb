@@ -4,7 +4,6 @@ class HousePolicy < ApplicationPolicy
     def resolve
       return scope.all if @user.is_admin?
       return @user.houses if @user.is_newuser?
-      
       scope.none
     end
   end

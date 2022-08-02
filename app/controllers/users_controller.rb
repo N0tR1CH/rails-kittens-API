@@ -55,10 +55,6 @@ class UsersController < ApplicationController
     render json: @user, status: 200
   end
 
-  def as_json(options = {})
-    super(options.merge(include: :roles.pluck(:name)))
-  end
-
   private
 
   def user_params
