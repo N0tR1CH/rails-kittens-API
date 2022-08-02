@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   resources :kittens 
   resources :users
   resources :houses
+  resources :companies
   root "kittens#index"
 end
