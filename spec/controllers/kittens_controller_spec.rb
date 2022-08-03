@@ -16,6 +16,7 @@ describe KittensController do
         end
         context 'with kittens' do
             it { expect(JSON.parse(response.body).count).to eq(3) }
+
         end
 
         context 'without kittens' do
