@@ -56,7 +56,7 @@ class HousesController < ApplicationController
   end
 
   def set_house
-    @house = House.find(params[:id])
+    @house = houses.find(params[:id])
     rescue ActiveRecord::RecordNotFound
     head :not_found
   end
