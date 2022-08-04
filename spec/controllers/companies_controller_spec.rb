@@ -45,7 +45,7 @@ describe CompaniesController do
     let(:company) { create :company }
     let(:company_id) { company.id }
     context 'admin' do
-      context 'can see whatever company he wants to' do
+      context 'can see whatever company he wantsrto' do
         let(:create_request) { get :show, params: { id: company_id } }
         before { create_request }
         it { expect(JSON.parse(response.body)['id']).to eq(company_id) }
@@ -63,9 +63,16 @@ describe CompaniesController do
     # end
   end
 
+  describe '[POST] #create' do
+    let(:user) { create :user }
+    let(:company_params) { { company: { name: 'company_name' } } }
+    let(:create_request) { post :create, params: company_params }
+    it { expect { create_request }.to change { Company.count }.from(0).to(1) }
+  end
+
   describe '[POST] #add_user' do
     let(:company) { create :company }
-    let(:user) { create :user }
+    let(:user) { create :admin }
     let(:user_id) { user.id }
     let(:create_request) { post :add_user, params: user_params }
     let(:user_params) {  { user_ids: [user_id], id: company.id } }

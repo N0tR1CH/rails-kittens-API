@@ -18,7 +18,7 @@ class CompaniesController < ApplicationController
   def create
     @company = current_user.companies.new(company_params)
     if @company.save
-      current_user.add_role :creator, @company
+      # current_user.add_role :creator, @company
       render json: @company, status: 201
     else
       render json: { errors: @company.errors.full_messages }, status: 422
