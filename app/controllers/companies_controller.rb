@@ -4,12 +4,11 @@ class CompaniesController < ApplicationController
 
   def index
     @companies = companies
-    
     render json: @companies
   end
 
   def show
-    render json: @companies, serializer: CompanySerializer
+    render json: @company, serializer: CompanySerializer
   end
 
   def new
@@ -18,7 +17,6 @@ class CompaniesController < ApplicationController
 
   def create
     @company = current_user.companies.new(company_params)
-   
     if @company.save
       current_user.add_role :creator, @company
       render json: @company, status: 201
@@ -28,7 +26,7 @@ class CompaniesController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def add_user
@@ -36,11 +34,11 @@ class CompaniesController < ApplicationController
       @company.users << User.where(id: params[:user_ids])
       render json: @company, status: 200
     rescue ActiveRecord::RecordInvalid
-      render json: { message: "One of the users is already in the company." } 
+      render json: { message: 'One of the users is already in the company.' } 
     end
   end
 
-  def update    
+  def update
     if @company.update(company_params)
       current_user.add_role :editor, @company
       render json: @company, status: 204
@@ -66,7 +64,7 @@ class CompaniesController < ApplicationController
 
   def set_company
     @company = Company.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
+  rescue ActiveRecord::RecordNotFound
     head :not_found
   end
 
