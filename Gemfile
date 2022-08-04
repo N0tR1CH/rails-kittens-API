@@ -91,3 +91,4 @@ end
 
 gem "pundit", "~> 2.2"
 gem 'rolify', '~> 6.0'
+gem "bullet", "~> 7.0"

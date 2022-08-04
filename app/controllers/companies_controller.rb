@@ -25,9 +25,7 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def edit
-
-  end
+  def edit; end
 
   def add_user
     ActiveRecord::Base.transaction do
