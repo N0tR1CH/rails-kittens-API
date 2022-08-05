@@ -40,7 +40,6 @@ class CompaniesController < ApplicationController
 
   def update
     if @company.update(company_params)
-      current_user.add_role :editor, @company
       render json: @company, status: 204
     else
       render json: { errors: @company.errors.full_messages }, status: 304

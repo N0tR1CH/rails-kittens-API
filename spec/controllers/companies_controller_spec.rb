@@ -70,6 +70,59 @@ describe CompaniesController do
     it { expect { create_request }.to change { Company.count }.from(0).to(1) }
   end
 
+  describe '[PATCH] #update' do
+    let(:user) { create :admin }
+    let(:company) { create(:company, name: 'some_company') }
+    let(:company_params) { { company: { name: 'other_company' }, id: company_id } }
+    let(:company_id) { company.id }
+    let(:create_request) { patch :update, params: company_params }
+
+    context 'admin can update everything' do
+      it { expect { create_request }.to change { company.reload.name }.from('some_company').to('other_company') }
+    end
+
+    context 'user can update his company' do
+      let(:company) { create(:company, name: 'user_company') }
+      let(:user) { create :user, companies: [company] }
+      it { expect { create_request }.to change { company.reload.name }.from('user_company').to('other_company') }
+    end
+
+    # context 'user cannot update company hes not a part of' do
+    #   let(:user) { create :user }
+    #   let(:create_request) { patch :update, params: company_params }
+    #   it { expect { create_request }.not_to change { company.reload.name } }
+    # end
+  end
+
+  describe '[DELETE] #destroy' do
+    let(:user) { create :admin }
+    let!(:company) { create :company }
+    let(:company_id) { company.id }
+    let(:create_request) { delete :destroy, params: { id: company_id } }
+
+    context 'admin can destroy anything' do
+      it { expect { create_request }.to change { Company.count }.from(1).to(0) }
+    end
+
+    # context 'user' do
+    #   context 'user can destroy his own company' do
+    #     let(:user) { create :user, companies: [company] }
+    #     let!(:company) { create :company }
+    #     let(:company_id) { company.id }
+    #     let(:create_request) { delete :destroy, params: { id: company_id } }
+    #     it { expect { create_request }.to change { Company.count }.from(1).to(0) }
+    #   end
+
+    #   context 'user cannot destroy company he does not belong to' do
+    #     let(:user) { create :user }
+    #     let!(:company) { create :company }
+    #     let(:company_id) { company.id }
+    #     let(:create_request) { delete :destroy, params: { id: company_id } }
+    #     it { expect { create_request }.not_to change { Company.count } }
+    #   end
+    # end
+  end
+
   describe '[POST] #add_user' do
     let(:company) { create :company }
     let(:user) { create :admin }

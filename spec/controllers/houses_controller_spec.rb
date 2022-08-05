@@ -8,22 +8,20 @@ describe HousesController do
 
   before { request.headers.merge! auth_headers }
 
-  describe "[GET] #index" do
+  describe '[GET] #index' do
     let(:house1)  { create :house }
     let(:house2)  { create :house }
     let(:house3)  { create :house }
 
     before { get :index }
-    
     context 'normal user' do
       context 'with houses' do
         let(:user) { create :user, houses: [house1, house2, house3] }
 
         it { expect(JSON.parse(response.body).count).to eq(3) }
       end
-  
       context 'without houses' do
-        let!(:houses) {[]}
+        let!(:houses) { [] }
         it { expect(JSON.parse(response.body).count).to eq(0) } 
       end
     end
@@ -36,9 +34,8 @@ describe HousesController do
       context 'with houses' do
         it { expect(JSON.parse(response.body).count).to eq(3) }
       end
-  
       context 'without houses' do
-        let!(:houses) {[]}
+        let!(:houses) { [] }
         it { expect(JSON.parse(response.body).count).to eq(0) } 
       end
     end
@@ -122,7 +119,7 @@ describe HousesController do
       let!(:house) { create :house }
       let(:user) { create :admin }
       let(:house_id) { house.id }
-      let(:create_request) { delete :destroy, params: {id: house_id} }
+      let(:create_request) { delete :destroy, params: { id: house_id } }
 
       it { expect { create_request }.to change { House.count }.from(1).to(0) }
     end
