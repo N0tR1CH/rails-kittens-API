@@ -1,9 +1,9 @@
 class KittensController < ApplicationController
-  before_action :set_kitten, only: [:show]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_kitten, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index]
   
   def index
-    @kittens = Kitten.all
+    @kittens = kittens
     # respond_to do |format|
     #   format.html # index.html.erb
     #   format.xml  { render :xml => @kittens }
@@ -13,7 +13,7 @@ class KittensController < ApplicationController
   end
 
   def show
-    # render :json => Kitten.find(params[:id]) 
+    # render :json => Kitten.find(params[:id])
     # respond_to do |format|
     #   format.html # index.html.erb
     #   format.xml  { render :xml => @kitten }
@@ -27,7 +27,7 @@ class KittensController < ApplicationController
   end
 
   def create
-    @kitten = Kitten.new(kitten_params)
+    @kitten = kittens.new(kitten_params)
 
     if @kitten.save
       render json: @kitten, status: 201
@@ -36,13 +36,9 @@ class KittensController < ApplicationController
     end
   end
 
-  def edit
-    @kitten = Kitten.find(params[:id]) 
-  end
+  def edit; end
 
   def update
-    @kitten = Kitten.find(params[:id])
-
     if @kitten.update(kitten_params)
       render json: @kitten, status: 204
     else
@@ -51,20 +47,27 @@ class KittensController < ApplicationController
   end
 
   def destroy
-    @kitten = Kitten.find(params[:id]) 
     @kitten.destroy
     render json: @kitten, status: 200
+  end
+
+  def as_json(options = {})
+    super(options.merge(include: :user))
   end
 
   private
 
   def kitten_params
-    params.require(:kitten).permit(:name, :age, :cuteness, :softness)
+    params.require(:kitten).permit(:name, :age, :house_id, :cuteness, :softness)
   end
 
   def set_kitten
     @kitten = Kitten.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     head :not_found
+  end
+
+  def kittens
+    KittenPolicy::Scope.new(current_user, Kitten).resolve
   end
 end
