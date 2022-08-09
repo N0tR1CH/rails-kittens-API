@@ -22,12 +22,10 @@ class User < ActiveRecord::Base
   private
 
   def assing_default_role
-    self.add_role(:newuser) if self.roles.blank?
+    add_role(:newuser) if roles.blank?
   end
 
   def must_have_a_role
-    unless roles.any?
-      errors.add(:roles, "must have at least 1 role")
-    end
+    errors.add(:roles, 'must have at least 1 role') unless roles.any?
   end
 end
