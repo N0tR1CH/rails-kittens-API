@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_02_115445) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_08_083241) do
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -33,6 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_02_115445) do
     t.string "softness"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "house_id"
+    t.index ["house_id"], name: "index_kittens_on_house_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -90,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_02_115445) do
   end
 
   add_foreign_key "houses", "users"
+  add_foreign_key "kittens", "houses"
   add_foreign_key "user_companies", "companies"
   add_foreign_key "user_companies", "users"
 end

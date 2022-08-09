@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   has_many :user_companies
   has_many :companies, through: :user_companies
 
-
   # after an user is create within the database we are giving him a role newuser
   after_create :assing_default_role
 
