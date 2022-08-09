@@ -53,7 +53,7 @@ describe CompaniesController do
     end
     # context 'user' do
     #   context 'user cannot see whatever company he wants to' do
-    #     let(:user) { create :user }
+    #     let!(:user) { create :user }
     #     let(:create_request) { get :show, params: { id: company_id } }
     #     let(:company) { create :company }
     #     let(:company_id) { company.id }

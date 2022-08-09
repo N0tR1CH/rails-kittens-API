@@ -1,5 +1,6 @@
 require 'rails_helper'
+require 'devise'
+require 'faker'
 
-RSpec.describe Role, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Role, type: :model do
 end

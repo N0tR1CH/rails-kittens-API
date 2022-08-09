@@ -10,6 +10,7 @@ describe KittensController do
     end
 
     describe "[GET] index" do
+        let(:user) { create :admin }
         let!(:kittens) { create_list :kitten, 3 }
         before do
             get :index
@@ -20,7 +21,7 @@ describe KittensController do
         end
 
         context 'without kittens' do
-            let!(:kittens) {[]}
+            let!(:kittens) { [] }
             it { expect(JSON.parse(response.body).count).to eq(0) }
         end
     end
@@ -34,7 +35,7 @@ describe KittensController do
 
         context 'with id' do
             it { 
-                expect(JSON.parse(response.body)["id"]).to eq(kitten_id) }
+                expect(JSON.parse(response.body)['id']).to eq(kitten_id) }
         end
         
         context 'without id' do
@@ -91,16 +92,16 @@ describe KittensController do
         end
     end 
 
-    describe "[DELETE] #destroy" do
-        let(:kitten) { create :kitten}
-        let!(:kitten_id) { kitten.id }
-        let(:create_request) { delete :destroy, params: {id: kitten_id} }
-        context 'kitten deleted successfully' do
-            it { expect { create_request }.to change { Kitten.count }.from(1).to(0) }
-            it do
-                create_request
-                expect(response).to have_http_status(200)
-            end
-        end
+  describe '[DELETE] #destroy' do
+    let(:kitten) { create :kitten }
+    let!(:kitten_id) { kitten.id }
+    let(:create_request) { delete :destroy, params: { id: kitten_id } }
+    context 'kitten deleted successfully' do
+      it { expect { create_request }.to change { Kitten.count }.from(1).to(0) }
+      it do
+        create_request
+        expect(response).to have_http_status(200)
+      end
     end
+  end
 end
