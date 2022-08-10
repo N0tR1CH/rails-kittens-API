@@ -20,11 +20,10 @@ describe User, type: :model do
     end
   end
 
-  describe '#must_have_a_role' do
-    let!(:user) { create :user, roles: [] }
-    it 'should check if user have a role and add error if he does not' do
-      byebug
-      expect(1).to eq(1)
-    end
-  end
+  # describe '#must_have_a_role' do
+  #   let!(:user) { create :user, roles: [] }
+  #   it 'should check if user have a role and add error if he does not' do
+      
+  #   end
+  # end
 end
