@@ -23,7 +23,7 @@ describe User, type: :model do
   describe '#must_have_a_role' do
     let!(:user) { create :user, roles: [] }
     it 'should check if user have a role and add error if he does not' do
-      pexpect(1).to eq(1)
+      expect(1).to eq(1)
     end
   end
 end
