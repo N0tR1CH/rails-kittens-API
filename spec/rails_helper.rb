@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 # note: require 'devise' after require 'rspec/rails'
@@ -68,8 +70,8 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Devise::Controllers::Helpers
-  
-  # If you're working on a Rails app, simply place this at the bottom of 
+
+  # If you're working on a Rails app, simply place this at the bottom of
   # spec/rails_helper.rb (or in a support file if you so choose):
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|

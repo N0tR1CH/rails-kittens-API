@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def index
     @users = User.all
@@ -11,7 +13,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # render :json => Kitten.find(params[:id]) 
+    # render :json => Kitten.find(params[:id])
     # respond_to do |format|
     #   format.html # index.html.erb
     #   format.xml  { render :xml => @kitten }
@@ -36,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id]) 
+    @user = User.find(params[:id])
   end
 
   def update
@@ -50,7 +52,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id]) 
+    @user = User.find(params[:id])
     @user.destroy
     render json: @user, status: 200
   end

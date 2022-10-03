@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'devise'
 require 'faker'
@@ -12,5 +14,5 @@ describe KittenSerializer, type: :serializer do
 
   it 'has a age that matches' do
     is_expected.to include(age: kitten.age)
-  end  
+  end
 end

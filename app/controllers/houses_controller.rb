@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class HousesController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :set_house, only: [:show, :edit, :update, :destroy]
+  before_action :set_house, only: %i[show edit update destroy]
 
   def index
     @houses = houses
-    
+
     render json: @houses
   end
 
@@ -18,7 +20,7 @@ class HousesController < ApplicationController
 
   def create
     @house = current_user.houses.new(house_params)
-   
+
     if @house.save
       current_user.add_role :creator, @house
       render json: @house, status: 201
@@ -27,9 +29,7 @@ class HousesController < ApplicationController
     end
   end
 
-  def edit
-    
-  end
+  def edit; end
 
   def update
     if @house.update(house_params)
@@ -57,7 +57,7 @@ class HousesController < ApplicationController
 
   def set_house
     @house = houses.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
+  rescue ActiveRecord::RecordNotFound
     head :not_found
   end
 

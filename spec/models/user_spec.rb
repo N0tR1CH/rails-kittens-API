@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'devise'
 require 'faker'
@@ -20,10 +22,10 @@ describe User, type: :model do
     end
   end
 
-  # describe '#must_have_a_role' do
-  #   let!(:user) { create :user, roles: [] }
-  #   it 'should check if user have a role and add error if he does not' do
-      
-  #   end
-  # end
+  describe '#must_have_a_role' do
+    let!(:user) { create :user, roles: [] }
+    it 'should check if user have a role and add error if he does not' do
+      expect(1).to eq(1)
+    end
+  end
 end

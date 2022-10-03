@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CompaniesController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :set_company, only: [:show, :edit, :update, :destroy, :add_user]
+  before_action :set_company, only: %i[show edit update destroy add_user]
 
   def index
     @companies = companies
@@ -32,7 +34,7 @@ class CompaniesController < ApplicationController
       @company.users << User.where(id: params[:user_ids])
       render json: @company, status: 200
     rescue ActiveRecord::RecordInvalid
-      render json: { message: 'One of the users is already in the company.' } 
+      render json: { message: 'One of the users is already in the company.' }
     end
   end
 
